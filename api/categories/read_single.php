@@ -2,8 +2,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-include_once "../../config/database.php";
-include_once "../../model/category.php";
+include_once "../../config/Database.php";
+include_once "../../model/Category.php";
 
 // Instantiate DB connection
 $database = new Database();
