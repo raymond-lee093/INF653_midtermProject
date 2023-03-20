@@ -18,7 +18,7 @@ class Database {
   // DB Connect
   public function connect() {
     if ($this->connection){ 
-      return $this->connection = null;
+      return $this->connection;
     }
     else{
       $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}";
