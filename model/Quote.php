@@ -1,4 +1,4 @@
-<?php	
+<?php
 	class Quotes{
     // DB connection for quotes table
 		private $connection;
@@ -117,16 +117,17 @@
                   ORDER BY quotes.id';
         // Assign properties
         $this->author_id = $_GET["author_id"];
+        
         // Prepare statement 
         $stmt = $this->connection->prepare($query);
         // Bind parameter
         $stmt->bindParam(":author_id", $this->author_id);
         // Execute query
-        try { 
+        try{
           $stmt->execute();
           return $stmt;
         }
-        // Execution of query fails
+        //Execution of query fails
         catch(PDOException $error) {
             echo 'Connection Error: ' . $error->getMessage();
         }
@@ -158,14 +159,6 @@
         }
       }
     } 
-    // // Checks if a valid authorid or category id exists
-    // public function isValid($requested_id, $model){
-    //   // Set the id on the model
-    //   $model->id = $requested_id;
-    //   // Call read_single query on model
-    //   $result = $model->read_single();
-    //   return $result;
-    // }
     // Create quote
     public function create(){
       $query = 'INSERT INTO ' .$this->table. ' (quote, author_id, category_id)
@@ -181,10 +174,10 @@
       $stmt->bindParam(":author_id", $this->author_id);
       $stmt->bindParam(":category_id", $this->category_id);
       // Execute query
-      try { 
+        try { 
         $stmt->execute();
         return $stmt;
-      }
+        }
       // Execution of query fails
       catch(PDOException $error) {
             echo 'Connection Error: ' . $error->getMessage();
@@ -239,5 +232,5 @@
             echo 'Connection Error: ' . $error->getMessage();
       }
     }
-}
+  }
 ?>

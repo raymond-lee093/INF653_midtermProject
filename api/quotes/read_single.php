@@ -39,7 +39,7 @@ if(isset($_GET["author_id"]) && isset($_GET["category_id"])){
   // Get ids
   $quotes->author_id = isset($_GET["author_id"]) ? $_GET["author_id"] : die();
   $quotes->category_id = isset($_GET["category_id"]) ? $_GET["category_id"] : die();
-
+  
   // Get quote
   $result = $quotes->read_single();
   // Get row count
@@ -85,7 +85,7 @@ if(isset($_GET["author_id"]) && !isset($_GET["category_id"])){
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
       // Turn array keys into variable names
       extract($row);
-
+      
       // Create associative array for each row
       $quote_item = array(
         "id" => $id,
@@ -107,7 +107,7 @@ if(isset($_GET["author_id"]) && !isset($_GET["category_id"])){
 // Category id recieved in GET method
 if(isset($_GET["category_id"]) && !isset($_GET["author_id"])){
   // Get id
-  $quotes->author_id = isset($_GET["category_id"]) ? $_GET["category_id"] : die();
+  $quotes->category_id = isset($_GET["category_id"]) ? $_GET["category_id"] : die();
   // Get quote
   $result = $quotes->read_single();
   // Get row count

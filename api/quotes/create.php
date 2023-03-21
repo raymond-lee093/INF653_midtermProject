@@ -6,6 +6,10 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
 
 include_once "../../config/Database.php";
 include_once "../../model/Quote.php";
+include_once "../../model/Category.php";
+include_once "../../model/Author.php";
+include_once "../../functions/Function.php";
+
 
 // Instantiate DB connection
 $database = new Database();
@@ -21,11 +25,32 @@ if(!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id
   echo json_encode(array('message' => 'Missing Required Parameters'));
   exit();
 }
+
 // Assign to properties
 $quotes->id = $data->id;
 $quotes->quote = $data->quote;
 $quotes->author_id = $data->author_id;
 $quotes->category_id = $data->category_id;
+
+// Checks if category id exists
+$categories = new Categories($db);
+$categories->id = $quotes->category_id;
+$categoryExists = isValid($categories->id, $categories);
+// If it doesn't exist
+if(!$categoryExists){
+  echo json_encode(array("message" => "category_id Not Found"));
+  exit();
+}
+
+// Checks if author id exists
+$authors = new Authors($db);
+$authors->id = $quotes->author_id;
+$authorExists = isValid($authors->id, $authors);
+// If it doesn't exist
+if(!$authorExists){
+  echo json_encode(array("message" => "author_id Not Found"));
+  exit();
+}
 
 if($quotes->create()) {
   // Convert to JSON and output
