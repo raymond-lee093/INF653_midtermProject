@@ -28,13 +28,7 @@ $quotes->quote = $data->quote;
 $quotes->author_id = $data->author_id;
 $quotes->category_id = $data->category_id;
 
-// Create quote 
-$result = $quotes->create();
-// Get row count
-$num_of_rows = $result->rowCount();
-
-// If num_of_rows > 0, a row was created
-if($num_of_rows > 0 ) {
+if($quotes->create()) {
   // Convert to JSON and output
   echo json_encode(array("id" => $quotes->id, "quote" => $quotes->quote, 
                         "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
