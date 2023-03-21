@@ -16,7 +16,7 @@
 		public function __construct($db) {
 			$this->connection = $db;
 		}
-
+    
     // Read all quotes
     public function read_all_quotes(){
       $query = 'SELECT quotes.id, quotes.quote, authors.author, categories.category
@@ -157,8 +157,15 @@
             echo 'Connection Error: ' . $error->getMessage();
         }
       }
-    }
-
+    } 
+    // // Checks if a valid authorid or category id exists
+    // public function isValid($requested_id, $model){
+    //   // Set the id on the model
+    //   $model->id = $requested_id;
+    //   // Call read_single query on model
+    //   $result = $model->read_single();
+    //   return $result;
+    // }
     // Create quote
     public function create(){
       $query = 'INSERT INTO ' .$this->table. ' (quote, author_id, category_id)
@@ -183,7 +190,6 @@
             echo 'Connection Error: ' . $error->getMessage();
       }
     }
-
     // Update quote
     public function update(){
       $query = 'UPDATE ' .$this->table. '
@@ -213,12 +219,10 @@
             echo 'Connection Error: ' . $error->getMessage();
       }
     }
-
     // Delete quote
     public function delete(){
       $query = 'DELETE FROM ' .$this->table.
               ' WHERE id = :id';
-    
       // Prepare statement
       $stmt = $this->connection->prepare($query);
       // Clean data
