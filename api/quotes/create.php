@@ -48,7 +48,7 @@ $authors->id = $quotes->author_id;
 $authorExists = isValid($authors->id, $authors);
 // If it doesn't exist
 if(!$authorExists){
-  $x = json_encode(array("message" => "author_id Not Found"));
+  echo json_encode(array("message" => "author_id Not Found"));
   exit();
 }
 
