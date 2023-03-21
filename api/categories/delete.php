@@ -32,6 +32,6 @@ if($num_of_rows > 0 ) {
   echo json_encode(array("id" => $categories->id));
 } 
 else {
-  echo json_encode(array("Message" => "category_id Not Found."));
+  echo json_encode(array("message" => "category_id Not Found"));
 }
 ?>

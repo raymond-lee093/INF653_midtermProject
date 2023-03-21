@@ -32,6 +32,6 @@ if($num_of_rows > 0 ) {
   echo json_encode(array("id" => $authors->id));
 } 
 else {
-  echo json_encode(array("Message" => "author_id Not Found."));
+  echo json_encode(array("message" => "author_id Not Found"));
 }
 ?>

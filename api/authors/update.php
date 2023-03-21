@@ -20,7 +20,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 // If data poperty does not have a value
 if(!isset($data->author)){
-  echo json_encode(array("Message" => "Missing Required Parameters."));
+  echo json_encode(array("message" => "Missing Required Parameters"));
   exit();
 }
 

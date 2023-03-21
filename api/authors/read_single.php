@@ -27,6 +27,6 @@ if($authors->author !== null){
   echo json_encode($authors_array);
 }
 else{
-    echo json_encode(array("Message" => "author_id Not Found."));
+    echo json_encode(array("message" => "author_id Not Found"));
 }
 ?>

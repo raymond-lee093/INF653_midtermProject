@@ -19,7 +19,6 @@ $num_of_rows = $result->rowCount();
 
 if($num_of_rows > 0){
   $category_array = array();
-  $category_array["data"] = array();
 
   while($row = $result->fetch(PDO::FETCH_ASSOC)){
     // Turn array keys into variable names
@@ -32,13 +31,13 @@ if($num_of_rows > 0){
     );
     
     // Push each associative array into "data"
-    array_push($category_array["data"], $category_item);
+    array_push($category_array, $category_item);
   }
 
   // Convert to JSON and ouput
   echo json_encode($category_array);
 }
 else{
-    echo json_encode(array("Message" => "category_id Not Found."));
+    echo json_encode(array("message" => "category_id Not Found"));
 }
 ?>

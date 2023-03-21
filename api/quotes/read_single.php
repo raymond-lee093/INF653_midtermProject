@@ -33,7 +33,7 @@ if(isset($_GET["id"])){
     echo json_encode($quote_array);
   }
   else{
-    echo json_encode(array("Message" => "Quote Not Found."));
+    echo json_encode(array("message" => "No Quotes Found"));
   }
 }
 
@@ -69,7 +69,7 @@ if(isset($_GET["author_id"]) && isset($_GET["category_id"])){
     echo json_encode($quote_array);
     }
     else{
-      echo json_encode(array("Message" => "No Quotes Found."));
+      echo json_encode(array("message" => "No Quotes Found"));
     }
 }
 
@@ -103,7 +103,7 @@ if(isset($_GET["author_id"]) && !isset($_GET["category_id"])){
     echo json_encode($quote_array);
   }
   else{
-    echo json_encode(array("Message" => "No Quotes Found."));
+    echo json_encode(array("message" => "No Quotes Found"));
   }
 }
 
@@ -137,7 +137,7 @@ if(isset($_GET["category_id"]) && !isset($_GET["author_id"])){
     echo json_encode($quote_array);
   }
   else{
-    echo json_encode(array("Message" => "No Quotes Found."));
+    echo json_encode(array("message" => "No Quotes Found"));
   }
 }
 ?>

@@ -30,6 +30,6 @@ if($num_of_rows > 0 ) {
   echo json_encode(array("id" => $quotes->id));
 } 
 else {
-  echo json_encode(array("Message" => "No Quotes Found."));
+  echo json_encode(array("message" => "No Quotes Found"));
 }
 ?>

@@ -20,7 +20,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 // If data poperty does not have a value
 if(!isset($data->category)){
-  echo json_encode(array("Message" => "Missing Required Parameters."));
+  echo json_encode(array("message" => "Missing Required Parameters"));
   exit();
 }
 
@@ -39,6 +39,6 @@ if($num_of_rows > 0 ) {
   echo json_encode(array("id" => $categories->id, "category" => $categories->category));
 } 
 else {
-  echo json_encode(array("Message" => "category_id Not Found."));
+  echo json_encode(array("message" => "category_id Not Found"));
 }
 ?>
