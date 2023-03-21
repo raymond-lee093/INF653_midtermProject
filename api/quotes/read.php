@@ -19,7 +19,6 @@ $num_of_rows = $result->rowCount();
 
 if($num_of_rows > 0){
   $quote_array = array();
-  $quote_array["data"] = array();
 
   while($row = $result->fetch(PDO::FETCH_ASSOC)){
     // Turn array keys into variable names
@@ -32,7 +31,7 @@ if($num_of_rows > 0){
       "category" => $category
     );
     // Push each associative array into "data"
-    array_push($quote_array["data"], $quote_item);
+    array_push($quote_array, $quote_item);
   }
   // Convert to JSON and ouput
   echo json_encode($quote_array);
