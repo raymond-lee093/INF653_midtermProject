@@ -48,14 +48,13 @@ $authors->id = $quotes->author_id;
 $authorExists = isValid($authors->id, $authors);
 // If it doesn't exist
 if(!$authorExists){
-  echo json_encode(array("message" => "author_id Not Found"));
+  $x = json_encode(array("message" => "author_id Not Found"));
   exit();
 }
 
 if($quotes->create()) {
   // Convert to JSON and output
-  echo json_encode(array("id" => $quotes->id, "quote" => $quotes->quote, 
-                        "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
+  echo json_encode(array("id" => $quotes_id, "quote" => $quotes->quote, "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
 } 
 else {
   echo json_encode(array("message" => "No Quotes Found"));

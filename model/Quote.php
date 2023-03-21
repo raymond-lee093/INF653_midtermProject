@@ -174,10 +174,10 @@
       $stmt->bindParam(":author_id", $this->author_id);
       $stmt->bindParam(":category_id", $this->category_id);
       // Execute query
-        try { 
+      try { 
         $stmt->execute();
-        return $stmt;
-        }
+        return true;
+      }
       // Execution of query fails
       catch(PDOException $error) {
             echo 'Connection Error: ' . $error->getMessage();

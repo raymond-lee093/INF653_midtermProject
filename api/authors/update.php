@@ -28,13 +28,8 @@ if(!isset($data->author)){
 $authors->id = $data->id;
 $authors->author = $data->author;
 
-// Update author
-$result = $authors->update();
-// Get row count
-$num_of_rows = $result->rowCount();
-
 // If num_of_rows > 0, a row was update, otherwise no row wasn't updated
-if($num_of_rows > 0 ) {
+if($authors->update()) {
   // Convert to JSON and output
   echo json_encode(array("id" => $authors->id, "author" => $authors->author));
 } 

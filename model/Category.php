@@ -98,7 +98,7 @@ class Categories{
     // Execute query
     try { 
       $stmt->execute();
-      return $stmt;
+      return true;
     }
     // Execution of query fails
     catch(PDOException $error) {

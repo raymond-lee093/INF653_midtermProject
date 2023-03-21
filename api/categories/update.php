@@ -28,13 +28,7 @@ if(!isset($data->category)){
 $categories->id = $data->id;
 $categories->category = $data->category;
 
-// Update category
-$result = $categories->update();
-// Get row count
-$num_of_rows = $result->rowCount();
-
-// If num_of_rows > 0, a row was update, otherwise no row wasn't updated
-if($num_of_rows > 0 ) {
+if($categories->update()) {
   // Convert to JSON and output
   echo json_encode(array("id" => $categories->id, "category" => $categories->category));
 } 
