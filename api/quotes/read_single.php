@@ -20,15 +20,12 @@ if(isset($_GET["id"])){
   $quotes->read_single();
 
   if($quotes->quote !== null){
-    $quote_array = array();
-    $quote_item = array(
-      "id" => $quotes->id,
-      "quote" => $quotes->quote,
-      "author" => $quotes->author,
-      "category" => $quotes->category
+      $quote_array = array(
+        "id" => $quotes->id,
+        "quote" => $quotes->quote,
+        "author" => $quotes->author,
+        "category" => $quotes->category
     );
-    // Push each associative array into "data"
-    array_push($quote_array, $quote_item);
     //Convert to JSON and output
     echo json_encode($quote_array);
   }
