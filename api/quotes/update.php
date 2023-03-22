@@ -7,6 +7,8 @@ Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once "../../config/Database.php";
 include_once "../../model/Quote.php";
+include_once "../../model/Category.php";
+include_once "../../model/Author.php";
 
 // Instantiate DB connection
 $database = new Database();
