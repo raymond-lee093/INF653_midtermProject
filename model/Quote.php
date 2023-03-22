@@ -179,10 +179,16 @@
       $stmt->bindParam(":id", $this->id);
       // Execute query
       if($stmt->execute()){
-        return true;
+        // Fetch one associative array
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Checks if row returns array
+        if(is_array($row)){
+          return true;
+        }
       }
       return false;
     }
+
     // Delete quote
     public function delete(){
       $query = 'DELETE FROM ' .$this->table.
