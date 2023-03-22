@@ -51,7 +51,13 @@ if(!$authorExists){
 
 if($quotes->create()) {
   // Convert to JSON and output
-  echo json_encode(array("id" => $quotes->id, "quote" => $quotes->quote, "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
+    $quote_array = array(
+      "id" => $quotes->id, 
+      "quote" => $quotes->quote, 
+      "author_id" => $quotes->author_id, 
+      "category_id" => $quotes->category_id
+    );
+    echo json_encode($quote_array);
 } 
 else {
   echo json_encode(array("message" => "No Quotes Found"));
