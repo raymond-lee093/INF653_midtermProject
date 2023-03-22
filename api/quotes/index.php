@@ -2,12 +2,6 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-require_once "../../config/Database.php";
-require_once "../../model/Quote.php";
-require_once "../../model/Category.php";
-require_once "../../model/Author.php";
-require_once "../../functions/isValid.php";
-
 $method = $_SERVER["REQUEST_METHOD"];
 
 // Getting URI being passed

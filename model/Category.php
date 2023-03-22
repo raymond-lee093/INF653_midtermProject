@@ -39,15 +39,14 @@ class Categories{
     // Bind parameter
     $stmt->bindParam(":id", $this->id);
     // Execute query
-    if($stmt->execute()){
-      // Fetch one associative array
-      $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      // Checks if row returns array
-      if(is_array($row)){
-        // Set properties
-        $this->id = $row["id"];
-        $this->category = $row["category"];
-      }
+    $stmt->execute();
+    // Fetch one associative array
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Checks if row returns array
+    if(is_array($row)){
+      // Set properties
+      $this->id = $row["id"];
+      $this->category = $row["category"];
       return true;
     }
     return false;
