@@ -64,7 +64,7 @@
           $this->quote = $row["quote"];
           $this->author = $row["author"];
           $this->category = $row["category"];
-        }
+          }
       }
       // Author id and category id received in GET method
       if(isset($_GET["author_id"]) && isset($_GET["category_id"])){

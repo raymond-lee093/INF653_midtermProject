@@ -23,6 +23,15 @@ $data = json_decode(file_get_contents("php://input"));
 // Assign to properties
 $quotes->id = $data->id;
 
+// Checks if quote id exists
+$quoteid_in_db = new Quotes($db);
+$quoteExists = isValid($quotes->id, $quoteid_in_db);
+// If it doesn't exist
+if(!$quoteExists){
+  echo json_encode(array("message" => "No Quotes Found"));
+  exit();
+}
+
 // If num_of_rows > 0, a row was deleted, otherwise no row deleted
 if($quotes->delete()) {
   // Convert to JSON and output
