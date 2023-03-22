@@ -19,15 +19,24 @@ $categories = new Categories($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // If data poperty does not have a value
-if(!isset($data->category)){
+if(!isset($data->id)||!isset($data->category)){
   echo json_encode(array("message" => "Missing Required Parameters"));
   exit();
 }
-
 // Assign to properties
 $categories->id = $data->id;
 $categories->category = $data->category;
 
+// Checks if category id exists
+$categoryid_in_db = new Categories($db);
+$categoryExists = isValid($categories->id, $categoryid_in_db);
+// If it doesn't exist
+if(!$categoryExists){
+  echo json_encode(array("message" => "category_id Not Found"));
+  exit();
+}
+
+// Update category
 if($categories->update()) {
   // Convert to JSON and output
   echo json_encode(array("id" => $categories->id, "category" => $categories->category));

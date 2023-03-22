@@ -28,16 +28,28 @@ $quotes->quote = $data->quote;
 $quotes->author_id = $data->author_id;
 $quotes->category_id = $data->category_id;
 
-// Update quote
-$result = $quotes->update();
-// Get row count
-$num_of_rows = $result->rowCount();
+// Checks if category id exists
+$categoryid_in_db = new Categories($db);
+$categoryExists = isValid($quotes->category_id, $categoryid_in_db);
+// If it doesn't exist
+if(!$categoryExists){
+  echo json_encode(array("message" => "category_id Not Found"));
+  exit();
+}
 
-// If num_of_rows > 0, a row was update, otherwise no row wasn't updated
-if($num_of_rows > 0 ) {
+// Checks if author id exists
+$authorid_in_db = new Authors($db);
+$authorExists = isValid($quotes->author_id, $authorid_in_db);
+// If it doesn't exist
+if(!$authorExists){
+  echo json_encode(array("message" => "author_id Not Found"));
+  exit();
+}
+
+// Update quote
+if($quotes->update()) {
   // Convert to JSON and output
-  echo json_encode(array("id" => $quotes->id, "quote" => $quotes->quote, 
-                        "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
+  echo json_encode(array("id" => $quotes->id, "quote" => $quotes->quote, "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
 } 
 else {
   echo json_encode(array("message" => "No Quotes Found"));

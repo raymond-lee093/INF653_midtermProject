@@ -181,6 +181,7 @@
       // Execution of query fails
       catch(PDOException $error) {
             echo 'Connection Error: ' . $error->getMessage();
+            return false;
       }
     }
     // Update quote
@@ -205,11 +206,12 @@
       // Execute query
       try { 
         $stmt->execute();
-        return $stmt;
+        return true;
       }
       // Execution of query fails
       catch(PDOException $error) {
             echo 'Connection Error: ' . $error->getMessage();
+            return false;
       }
     }
     // Delete quote

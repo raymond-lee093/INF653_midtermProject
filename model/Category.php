@@ -79,6 +79,7 @@ class Categories{
     // Execution of query fails
     catch(PDOException $error) {
             echo 'Connection Error: ' . $error->getMessage();
+            return false;
     }
   }
 
@@ -102,7 +103,8 @@ class Categories{
     }
     // Execution of query fails
     catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
+      echo 'Connection Error: ' . $error->getMessage();
+      return false;
     }
   }
 

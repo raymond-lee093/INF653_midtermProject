@@ -26,9 +26,8 @@ $quotes->author_id = $data->author_id;
 $quotes->category_id = $data->category_id;
 
 // Checks if category id exists
-$categories = new Categories($db);
-$categories->id = $quotes->category_id;
-$categoryExists = isValid($categories->id, $categories);
+$categoryid_in_db = new Categories($db);
+$categoryExists = isValid($quotes->category_id, $categoryid_in_db);
 // If it doesn't exist
 if(!$categoryExists){
   echo json_encode(array("message" => "category_id Not Found"));
@@ -36,9 +35,8 @@ if(!$categoryExists){
 }
 
 // Checks if author id exists
-$authors = new Authors($db);
-$authors->id = $quotes->author_id;
-$authorExists = isValid($authors->id, $authors);
+$authorid_in_db = new Authors($db);
+$authorExists = isValid($quotes->author_id, $authorid_in_db);
 // If it doesn't exist
 if(!$authorExists){
   echo json_encode(array("message" => "author_id Not Found"));
@@ -47,7 +45,7 @@ if(!$authorExists){
 
 if($quotes->create()) {
   // Convert to JSON and output
-  echo json_encode(array("id" => $quotes_id, "quote" => $quotes->quote, "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
+  echo json_encode(array("id" => $quotes->id, "quote" => $quotes->quote, "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
 } 
 else {
   echo json_encode(array("message" => "No Quotes Found"));

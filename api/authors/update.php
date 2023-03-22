@@ -7,6 +7,7 @@ Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once "../../config/Database.php";
 include_once "../../model/Author.php";
+include_once "../../functions/isValid.php";
 
 // Instantiate DB connection
 $database = new Database();
@@ -19,7 +20,7 @@ $authors = new Authors($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // If data poperty does not have a value
-if(!isset($data->author)){
+if(!isset($data->id)||!isset($data->author)){
   echo json_encode(array("message" => "Missing Required Parameters"));
   exit();
 }
@@ -28,7 +29,16 @@ if(!isset($data->author)){
 $authors->id = $data->id;
 $authors->author = $data->author;
 
-// If num_of_rows > 0, a row was update, otherwise no row wasn't updated
+// Checks if author id exists
+$authorid_in_db = new Authors($db);
+$authorExists = isValid($authors->id, $authorid_in_db);
+// If it doesn't exist
+if(!$authorExists){
+  echo json_encode(array("message" => "author_id Not Found"));
+  exit();
+}
+
+// Update author
 if($authors->update()) {
   // Convert to JSON and output
   echo json_encode(array("id" => $authors->id, "author" => $authors->author));
