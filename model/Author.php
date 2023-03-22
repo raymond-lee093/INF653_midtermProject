@@ -39,7 +39,7 @@ class Authors{
     // Bind parameter
     $stmt->bindParam(":id", $this->id);
     // Execute query
-      $stmt->execute();
+    if($stmt->execute()){
       // Fetch one associative array
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
       // Checks if row returns array
@@ -48,6 +48,9 @@ class Authors{
         $this->id = $row["id"];
         $this->author = $row["author"];
       }
+      return true;
+    }
+    return false;
   }
 
   // Create author

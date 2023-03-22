@@ -4,10 +4,7 @@
       // Set the id on the model
       $model->id = $requested_id;
       // Call read_single query on model
-      $result = $model->read_single();
-      // Get row count
-      $num_of_rows = $result->rowCount();
-      if($num_of_rows > 0){
+      if($model->read_single()){
         return true;
       }
       return false;
