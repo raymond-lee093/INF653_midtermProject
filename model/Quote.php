@@ -153,6 +153,7 @@
       $stmt->bindParam(":category_id", $this->category_id);
       // Execute query
       if($stmt->execute()){
+        $this->id = $this->connection->lastInsertId();
         return true;
       }
       return false;
