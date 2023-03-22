@@ -7,6 +7,7 @@ Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once "../../config/Database.php";
 include_once "../../model/Author.php";
+include_once "../../functions/isValid.php";
 
 // Instantiate DB connection
 $database = new Database();
@@ -22,12 +23,7 @@ $data = json_decode(file_get_contents("php://input"));
 $authors->id = $data->id;
 
 // Delete author
-$result = $authors->delete();
-// Get row count
-$num_of_rows = $result->rowCount();
-
-// If num_of_rows > 0, a row was deleted, otherwise no row delete
-if($num_of_rows > 0 ) {
+if($authors->delete()) {
   // Convert to JSON and output
   echo json_encode(array("id" => $authors->id));
 } 

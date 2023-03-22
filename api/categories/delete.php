@@ -22,12 +22,7 @@ $data = json_decode(file_get_contents("php://input"));
 $categories->id = $data->id;
 
 // Delete category
-$result = $categories->delete();
-// Get row count
-$num_of_rows = $result->rowCount();
-
-// If num_of_rows > 0, a row was deleted, otherwise no row delete
-if($num_of_rows > 0 ) {
+if($categories->delete()) {
   // Convert to JSON and output
   echo json_encode(array("id" => $categories->id));
 } 
