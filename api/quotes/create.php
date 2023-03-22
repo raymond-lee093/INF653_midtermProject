@@ -26,7 +26,6 @@ if(!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id
 }
 
 // Assign to properties
-$quotes->id = $data->id;
 $quotes->quote = $data->quote;
 $quotes->author_id = $data->author_id;
 $quotes->category_id = $data->category_id;
@@ -51,13 +50,7 @@ if(!$authorExists){
 
 if($quotes->create()) {
   // Convert to JSON and output
-    $quote_array = array(
-      "id" => $quotes->id, 
-      "quote" => $quotes->quote, 
-      "author_id" => $quotes->author_id, 
-      "category_id" => $quotes->category_id
-    );
-    echo json_encode($quote_array);
+  echo json_encode(array("id" => $quotes->id, "quote" => $quotes->quote, "author_id" => $quotes->author_id, "category_id" => $quotes->category_id));
 } 
 else {
   echo json_encode(array("message" => "No Quotes Found"));
