@@ -30,6 +30,15 @@ $quotes->quote = $data->quote;
 $quotes->author_id = $data->author_id;
 $quotes->category_id = $data->category_id;
 
+// Checks if quote id exists
+$quoteid_in_db = new Quotes($db);
+$quoteExists = isValid($quotes->id, $quoteid_in_db);
+// If it doesn't exist
+if(!$quoteExists){
+  echo json_encode(array("message" => "No Quotes Found"));
+  exit();
+}
+
 // Checks if category id exists
 $categoryid_in_db = new Categories($db);
 $categoryExists = isValid($quotes->category_id, $categoryid_in_db);
