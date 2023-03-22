@@ -9,6 +9,7 @@ include_once "../../config/Database.php";
 include_once "../../model/Quote.php";
 include_once "../../model/Category.php";
 include_once "../../model/Author.php";
+include_once "../../functions/isValid.php";
 
 // Instantiate DB connection
 $database = new Database();
