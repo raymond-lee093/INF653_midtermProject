@@ -21,15 +21,10 @@ class Authors{
     // Prepare statement
     $stmt = $this->connection->prepare($query);
     // Execute query
-    try { 
-      $stmt->execute();
+    if($stmt->execute()){
       return $stmt;
     }
-    // Execution of query fails
-    catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-            
-    }
+    return false;
   }
 
   // Read single author
@@ -44,7 +39,6 @@ class Authors{
     // Bind parameter
     $stmt->bindParam(":id", $this->id);
     // Execute query
-    try { 
       $stmt->execute();
       // Fetch one associative array
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -53,13 +47,6 @@ class Authors{
         // Set properties
         $this->id = $row["id"];
         $this->author = $row["author"];
-      }
-      return $stmt;
-      }
-      // Execution of query fails
-      catch(PDOException $error) {
-              echo 'Connection Error: ' . $error->getMessage();
-              
       }
   }
 
@@ -73,15 +60,11 @@ class Authors{
     $this->author = htmlspecialchars(strip_tags($this->author));
     // Bind parameter
     $stmt->bindParam(":author", $this->author);
-    try { 
-      $stmt->execute();
+    // Execute query
+    if($stmt->execute()){
       return true;
     }
-    // Execution of query fails
-    catch(PDOException $error) {
-        echo 'Connection Error: ' . $error->getMessage();
-        return false;
-    }
+    return false;
   }
 
   // Update author
@@ -98,15 +81,10 @@ class Authors{
     $stmt->bindParam(":author", $this->author);
     $stmt->bindParam(":id", $this->id);
     // Execute query
-    try { 
-      $stmt->execute();
+    if($stmt->execute()){
       return true;
     }
-    // Execution of query fails
-    catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-            return false;
-    }
+    return false;
   }
 
   // Delete author
@@ -121,14 +99,10 @@ class Authors{
     // Bind parameters
     $stmt->bindParam(":id", $this->id);
     // Execute query
-    try { 
-      $stmt->execute();
-      return $stmt;
+    if($stmt->execute()){
+      return true;
     }
-    // Execution of query fails
-    catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-    }
+    return false;
   }
 }
 ?>

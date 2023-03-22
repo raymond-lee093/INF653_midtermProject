@@ -29,14 +29,10 @@
       // Prepare statement
       $stmt = $this->connection->prepare($query);
       // Execute query
-      try { 
-        $stmt->execute();
+      if($stmt->execute()){
         return $stmt;
       }
-      // Execution of query fails
-      catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-      }
+      return false;
     }
 
     // Read single quote
@@ -58,7 +54,6 @@
         // Bind parameter
         $stmt->bindParam(":id", $this->id);
         // Execute query
-        try { 
           $stmt->execute();
           // Fetch one associative array
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -70,11 +65,6 @@
             $this->author = $row["author"];
             $this->category = $row["category"];
           }
-        }
-        // Execution of query fails
-        catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-        }
       }
       // Author id and category id received in GET method
       if(isset($_GET["author_id"]) && isset($_GET["category_id"])){
@@ -96,14 +86,10 @@
         $stmt->bindParam(":author_id", $this->author_id);
         $stmt->bindParam(":category_id", $this->category_id);
         // Execute query
-        try { 
-          $stmt->execute();
+        if($stmt->execute()){
           return $stmt;
         }
-        // Execution of query fails
-        catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-        }
+        return false;
       }
       // Author id received in GET method
       if(isset($_GET["author_id"])) {
@@ -123,14 +109,10 @@
         // Bind parameter
         $stmt->bindParam(":author_id", $this->author_id);
         // Execute query
-        try{
-          $stmt->execute();
+        if($stmt->execute()){
           return $stmt;
         }
-        //Execution of query fails
-        catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-        }
+        return false;
       }
       // Category id recieved in GET method
       if(isset($_GET["category_id"])) {
@@ -149,14 +131,10 @@
         // Bind parameter
         $stmt->bindParam(":category_id", $this->category_id);
         // Execute query
-        try { 
-          $stmt->execute();
+        if($stmt->execute()){
           return $stmt;
         }
-        // Execution of query fails
-        catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-        }
+        return false;
       }
     } 
     // Create quote
@@ -174,15 +152,10 @@
       $stmt->bindParam(":author_id", $this->author_id);
       $stmt->bindParam(":category_id", $this->category_id);
       // Execute query
-      try { 
-        $stmt->execute();
+      if($stmt->execute()){
         return true;
       }
-      // Execution of query fails
-      catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-            return false;
-      }
+      return false;
     }
     // Update quote
     public function update(){
@@ -204,15 +177,10 @@
       $stmt->bindParam(":category_id", $this->category_id);
       $stmt->bindParam(":id", $this->id);
       // Execute query
-      try { 
-        $stmt->execute();
+      if($stmt->execute()){
         return true;
       }
-      // Execution of query fails
-      catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-            return false;
-      }
+      return false;
     }
     // Delete quote
     public function delete(){
@@ -225,14 +193,10 @@
       // Bind parameters
       $stmt->bindParam(":id", $this->id);
       // Execute query
-      try { 
-        $stmt->execute();
-        return $stmt;
+      if($stmt->execute()){
+        return true;
       }
-      // Execution of query fails
-      catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-      }
+      return false;
     }
   }
 ?>

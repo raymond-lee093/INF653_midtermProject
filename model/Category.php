@@ -20,15 +20,11 @@ class Categories{
               ORDER BY id';
     // Prepare statement
     $stmt = $this->connection->prepare($query);
-      // Execute query
-      try { 
-        $stmt->execute();
-        return $stmt;
-      }
-      // Execution of query fails
-      catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-      }
+    // Execute query
+    if($stmt->execute()){
+      return $stmt;
+    }
+    return false;
   }
 
   // Read single category
@@ -42,22 +38,15 @@ class Categories{
     $stmt = $this->connection->prepare($query);
     // Bind parameter
     $stmt->bindParam(":id", $this->id);
-      // Execute query
-    try { 
-      $stmt->execute();
-      // Fetch one associative array
-      $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      // Checks if row returns array
-      if(is_array($row)){
-        // Set properties
-        $this->id = $row["id"];
-        $this->category = $row["category"];
-      }
-      return $stmt;
-    }
-    // Execution of query fails
-    catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
+    // Execute query
+    $stmt->execute();
+    // Fetch one associative array
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Checks if row returns array
+    if(is_array($row)){
+      // Set properties
+      $this->id = $row["id"];
+      $this->category = $row["category"];
     }
   }
 
@@ -72,15 +61,11 @@ class Categories{
     // Bind parameter
     $stmt->bindParam(":category", $this->category);
     // Execute query
-    try { 
-      $stmt->execute();
+    if($stmt->execute()){
       return true;
     }
-    // Execution of query fails
-    catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-            return false;
-    }
+    return false;
+    
   }
 
   // Update category
@@ -97,15 +82,10 @@ class Categories{
     $stmt->bindParam(":category", $this->category);
     $stmt->bindParam(":id", $this->id);
     // Execute query
-    try { 
-      $stmt->execute();
+    if($stmt->execute()){
       return true;
     }
-    // Execution of query fails
-    catch(PDOException $error) {
-      echo 'Connection Error: ' . $error->getMessage();
-      return false;
-    }
+    return false;
   }
 
   // Delete category
@@ -120,14 +100,10 @@ class Categories{
     // Bind parameters
     $stmt->bindParam(":id", $this->id);
     // Execute query
-    try { 
-      $stmt->execute();
-      return $stmt;
+    if($stmt->execute()){
+      return true;
     }
-    // Execution of query fails
-    catch(PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-    }
+    return false;
   }
 }
 ?>
