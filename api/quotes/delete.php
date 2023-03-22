@@ -23,15 +23,6 @@ $data = json_decode(file_get_contents("php://input"));
 // Assign to properties
 $quotes->id = $data->id;
 
-// Checks if author id exists
-$quotesid_in_db = new Authors($db);
-$quotesExists = isValid($quotes->id, $quotesid_in_db);
-// If it doesn't exist
-if(!$quotesExists){
-  echo json_encode(array("message" => "Quote Not Found"));
-  exit();
-}
-
 // Delete row
 if($quotes->delete()) {
   // Convert to JSON and output
